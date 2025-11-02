@@ -21,7 +21,8 @@ struct ContentView: View {
             
         }.ignoresSafeArea()*/
         VStack{
-            LinearGradient(colors: [.white, .black], startPoint: .top, endPoint: .bottom)
+        //    LinearGradient(colors: [.white, .black], startPoint: .top, endPoint: .bottom)
+            RadialGradient(colors: [.blue, .black], center: .center, startRadius: 20, endRadius: 200)
         }
         
         
