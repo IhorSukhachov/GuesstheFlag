@@ -23,7 +23,11 @@ struct ContentView: View {
         VStack{
         //    LinearGradient(colors: [.white, .black], startPoint: .top, endPoint: .bottom)
         //    RadialGradient(colors: [.blue, .black], center: .center, startRadius: 20, endRadius: 200)
-            AngularGradient(colors: [.blue, .black, .red, .yellow, .purple, .green], center: .center)
+        //    AngularGradient(colors: [.blue, .black, .red, .yellow, .purple, .green], center: .center)
+            Text("Some text").frame(maxWidth: .infinity, maxHeight: .infinity)
+                .foregroundStyle(.white)
+                .background(.black.gradient)
+                
         }.ignoresSafeArea()
         
         
