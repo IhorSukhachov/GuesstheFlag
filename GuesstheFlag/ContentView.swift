@@ -26,11 +26,15 @@ struct ContentView: View {
         //    AngularGradient(colors: [.blue, .black, .red, .yellow, .purple, .green], center: .center)
             Text("Some text").frame(maxWidth: .infinity, maxHeight: .infinity)
                 .foregroundStyle(.white)
-                .background(.black.gradient)
                 
-        }.ignoresSafeArea()
+            Button("Delete All", role:.destructive, action: executeDelete).buttonStyle(.bordered)
+                
+        }.ignoresSafeArea().background(.black.gradient)
         
         
+    }
+    func executeDelete(){
+        print("Delete All")
     }
 }
 
