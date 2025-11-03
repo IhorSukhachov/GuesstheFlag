@@ -12,8 +12,10 @@ struct ContentView: View {
    @State private var correctAnswer = Int.random(in: 0...2)
     @State private var showingScore = false
     @State private var scoreTitle = ""
-    
+    @State private var gameOver = false
     @State private var userScore = 0
+    @State private var rounds: Int = 0
+    
     var body: some View {
         ZStack {
             //            LinearGradient(colors: [.blue, .black], startPoint: .top, endPoint: .bottom)
@@ -60,20 +62,33 @@ struct ContentView: View {
                 Button("Continue", action: askQuestion)
             } message: {
                 Text("Your score is \(userScore).")
-            }.padding()
+            }.alert("Game over, you scored \(userScore)", isPresented: $gameOver) {
+                Button("Play again", action: {
+                    gameOver = false
+                    userScore = 0
+                }).padding()
         }
-        
+        }
     }
     func flagTapped (_ number: Int) {
+        
         if number == correctAnswer {
             scoreTitle = "Correct!"
             userScore += 1
         }
         else {
-            scoreTitle = "Wrong! The correct asnwer is \(countries[correctAnswer])."
+            scoreTitle = "Wrong! This is a flag of \(countries[number])."
         }
         showingScore = true
+        rounds += 1
+        if rounds == 5 {
+            showingScore = false
+            gameOver = true
+            rounds = 0
+        }
     }
+        
+    
     func askQuestion() {
         countries.shuffle()
         correctAnswer = Int.random(in: 0...2)
