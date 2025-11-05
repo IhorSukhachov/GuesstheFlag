@@ -7,26 +7,42 @@
 
 import SwiftUI
 
+struct Title: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .font(.largeTitle)
+            .foregroundStyle(.blue)
+            .padding()
+    }
+    
+}
+
+struct FlagImage: View {
+    var image: String
+    
+    var body: some View {
+        Image(image)
+            .clipShape(.capsule)
+            .shadow(radius: 5)
+    }
+}
+
+extension View {
+    func prominentTitle() -> some View {
+        modifier(Title())
+    }
+}
+
 struct ContentView: View {
     @State private var countries = ["Estonia", "France", "Germany", "Ireland", "Italy", "Nigeria", "Poland", "Spain", "UK", "Ukraine", "US"].shuffled()
-   @State private var correctAnswer = Int.random(in: 0...2)
+    @State private var correctAnswer = Int.random(in: 0...2)
     @State private var showingScore = false
     @State private var scoreTitle = ""
     @State private var gameOver = false
     @State private var userScore = 0
     @State private var rounds: Int = 0
-    
-
-    struct FlagImage: View {
-        var image: String
-
-        var body: some View {
-            Image(image)
-                .clipShape(.capsule)
-                .shadow(radius: 5)
-        }
-    }
-    
+   
+   
     var body: some View {
         ZStack {
             //            LinearGradient(colors: [.blue, .black], startPoint: .top, endPoint: .bottom)
@@ -38,8 +54,8 @@ struct ContentView: View {
             VStack {
                 Spacer()
                 Text("Guess the Flag")
-                    .font(.largeTitle.weight(.bold))
-                    .foregroundStyle(.white)
+                    .font(.largeTitle.weight(.bold)).prominentTitle()
+                  //  .foregroundStyle(.white)
                 
                 VStack(spacing: 15) {
                     VStack {
