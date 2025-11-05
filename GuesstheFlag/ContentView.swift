@@ -16,6 +16,17 @@ struct ContentView: View {
     @State private var userScore = 0
     @State private var rounds: Int = 0
     
+
+    struct FlagImage: View {
+        var image: String
+
+        var body: some View {
+            Image(image)
+                .clipShape(.capsule)
+                .shadow(radius: 5)
+        }
+    }
+    
     var body: some View {
         ZStack {
             //            LinearGradient(colors: [.blue, .black], startPoint: .top, endPoint: .bottom)
@@ -43,8 +54,7 @@ struct ContentView: View {
                             
                         }
                         label: {
-                            Image(countries[number]).clipShape(.capsule)
-                                .shadow(radius: 5)
+                            FlagImage(image: countries[number])
                         }
                     }
                     
