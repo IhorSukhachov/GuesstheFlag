@@ -75,7 +75,9 @@ struct ContentView: View {
                        
                         label: {
                             FlagImage(country: countries[number])
-                                .opacity(chosenFlag == nil || chosenFlag == number ? 1 : 0.05)
+                                .opacity(chosenFlag == nil || chosenFlag == number ? 1 : 0.25)
+                                .rotation3DEffect(chosenFlag == number ? .degrees(360) : .degrees(0),
+                                                  axis: (x: 0, y: 1, z: 0))
                         }
                     }
                     
