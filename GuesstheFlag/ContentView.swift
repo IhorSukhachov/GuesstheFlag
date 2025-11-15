@@ -18,10 +18,10 @@ struct Title: ViewModifier {
 }
 
 struct FlagImage: View {
-    var image: String
+    var country: String
     
     var body: some View {
-        Image(image)
+        Image(country)
             .clipShape(.capsule)
             .shadow(radius: 5)
     }
@@ -41,6 +41,8 @@ struct ContentView: View {
     @State private var gameOver = false
     @State private var userScore = 0
     @State private var rounds: Int = 0
+    @State private var isEnabled = false
+    @State private var chosenFlag: Int? = nil
    
    
     var body: some View {
@@ -67,10 +69,13 @@ struct ContentView: View {
                         
                         Button {
                             flagTapped(number)
+                            chosenFlag = number
                             
                         }
+                       
                         label: {
-                            FlagImage(image: countries[number])
+                            FlagImage(country: countries[number])
+                                .opacity(chosenFlag == nil || chosenFlag == number ? 1 : 0.05)
                         }
                     }
                     
@@ -118,6 +123,7 @@ struct ContentView: View {
     func askQuestion() {
         countries.shuffle()
         correctAnswer = Int.random(in: 0...2)
+        chosenFlag = nil
     }
 }
 
