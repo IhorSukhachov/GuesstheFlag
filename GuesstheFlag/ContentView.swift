@@ -43,6 +43,7 @@ struct ContentView: View {
     @State private var rounds: Int = 0
     @State private var isEnabled = false
     @State private var chosenFlag: Int? = nil
+    
    
    
     var body: some View {
@@ -71,6 +72,7 @@ struct ContentView: View {
                             flagTapped(number)
                             chosenFlag = number
                             
+                            
                         }
                        
                         label: {
@@ -78,6 +80,9 @@ struct ContentView: View {
                                 .opacity(chosenFlag == nil || chosenFlag == number ? 1 : 0.25)
                                 .rotation3DEffect(chosenFlag == number ? .degrees(360) : .degrees(0),
                                                   axis: (x: 0, y: 1, z: 0))
+                                
+                                .scaleEffect(chosenFlag == nil || chosenFlag == number ? 1 : 0.5)
+                                .animation(.spring(duration: 1, bounce: 0.8), value: chosenFlag)
                         }
                     }
                     
@@ -99,12 +104,13 @@ struct ContentView: View {
                 Button("Play again", action: {
                     gameOver = false
                     userScore = 0
+                    askQuestion()
                 }).padding()
         }
         }
     }
     func flagTapped (_ number: Int) {
-        
+       
         if number == correctAnswer {
             scoreTitle = "Correct!"
             userScore += 1
@@ -118,6 +124,7 @@ struct ContentView: View {
             showingScore = false
             gameOver = true
             rounds = 0
+            
         }
     }
         
